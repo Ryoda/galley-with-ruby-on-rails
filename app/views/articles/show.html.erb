@@ -2,7 +2,7 @@
 <div><h1><%= @article.title %></h1></div>
 <div> Escrito por: <%= @article.user.email unless @article.user.nil? %></div>
 <div class="field">
-	<%= image_tag @article.cover.url %>
+	<%= image_tag @article.cover.url(:medium) %>
 </div>
 <div> Visitas: <%= @article.visits_count unless @article.visits_count.nil? %></div>
 <div><p><%= @article.body %><p></div>

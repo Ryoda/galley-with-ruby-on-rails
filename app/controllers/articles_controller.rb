@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
 	end
 	def new
 		@article = Article.new 
+		@categorie = Category.all
 	end
 	def create
 		@article = current_user.articles.new(article_params)

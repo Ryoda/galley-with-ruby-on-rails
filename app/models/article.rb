@@ -5,7 +5,7 @@ class Article < ActiveRecord::Base
 	validates :body, presence: true, length: {minimum: 20}
 	before_save :set_visits_count
 
-	has_attached_file :cover, styles: { medium: "1280x720", thumb: "600x400"}
+	has_attached_file :cover, styles: { medium: "1280x720", thumb: "400x200"}
 	validates_attachment_content_type :cover, content_type: /\Aimage\/.*\Z/
 
 	def update_visits_count
