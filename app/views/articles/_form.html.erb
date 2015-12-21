@@ -16,7 +16,9 @@
 		</div>
 		<div class="field"> 
 			<label> Tags:
-			<%= f.search_field "categories[]", @categories %>
+			<% @tags.each do |tag| %>
+			<%= check_box_tag "tags[]", tag.id %> <%= tag.name %>
+			<% end %>
 			</label>
 		</div>
 		<div class="field">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209203739) do
+ActiveRecord::Schema.define(version: 20151221015417) do
 
   create_table "articles", force: :cascade do |t|
     t.datetime "created_at",         null: false
@@ -41,13 +41,13 @@ ActiveRecord::Schema.define(version: 20151209203739) do
 
   create_table "has_tags", force: :cascade do |t|
     t.integer  "article_id"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "has_tags", ["article_id"], name: "index_has_tags_on_article_id"
-  add_index "has_tags", ["category_id"], name: "index_has_tags_on_category_id"
+  add_index "has_tags", ["tag_id"], name: "index_has_tags_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20151209203739) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "permission_level",       default: 1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

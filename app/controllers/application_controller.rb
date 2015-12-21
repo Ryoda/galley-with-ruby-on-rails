@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_action :set_tags
 
+  protected
+
+	def authenticate_moderator!
+		redirect_to root_path unless user_signed_in? && current_user.is_moderator?
+	end
+	def authenticate_admin!
+		redirect_to root_path unless user_signed_in? && current_user.is_admin?
+	end
+
   private
 
   def set_tags 

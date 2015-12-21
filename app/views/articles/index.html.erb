@@ -1,9 +1,11 @@
+<h4><%= link_to "Crear Post" , new_article_path %></h4>
 
 <ul>
 <% @articles.each do |article| %>
 	<li>
 		<div>
-		<h1><%= link_to article.title, article %> </h1>
+		<h3><%= link_to article.title, article %> </h3>
+		<%= image_tag article.cover.url :thumb %>
 		<p><%= article.body%> - <%= link_to "Eliminar", article, method: :delete %> </p>
 		</div>
 	</li>

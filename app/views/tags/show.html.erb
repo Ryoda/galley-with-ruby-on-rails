@@ -10,5 +10,17 @@
   <%= @tag.description %>
 </p>
 
+<ul>
+	<%@tag.articles.each do |article| %>
+	<li>
+		<div>
+		<h1><%= link_to article.title, article %> </h1>
+		<%= image_tag article.cover.url :thumb %>
+		<p><%= article.body%> - <%= link_to "Eliminar", article, method: :delete %> </p>
+		</div>
+	</li>
+	<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>

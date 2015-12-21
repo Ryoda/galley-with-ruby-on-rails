@@ -9,6 +9,14 @@
 <div>
 <%= link_to "Editar", edit_article_path(@article) %>
 </div>
+	<h3> Tags: </h3>
+	<div>
+		<% @article.tags.each do |tag| %>
+		<span> 
+			<%= link_to tag.name, tag %> 
+		</span>
+		<% end %>
+	</div>
 <div >
 	<h3>Comentarios:</h3>
 	<%= render "comments/form" %>
@@ -21,6 +29,7 @@
 			</li>	
 		<% end %>
 	</ul>
+
 	
 </div>
 </div>
