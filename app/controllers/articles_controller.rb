@@ -1,13 +1,16 @@
 class ArticlesController < ApplicationController
-	before_action :authenticate_user!, except: [:show, :index]
+
 	before_action :set_article, except: [:index, :new, :create]
-	before_action :authenticate_moderator!, only:[:delete]
-	before_action :authenticate_admin!, only:[:new, :edit, :destroy]
+	#authentications 
+	before_action :authenticate_user!, except: [:show, :index]
+	before_action :authenticate_moderator!, only:[:delete, :destroy]
+	before_action :authenticate_admin!, only:[:publish, :destroy]
 	def index
-		@articles = Article.all
+		@articles = Article.paginate(page: params[:page], per_page: 15).publicados.ultimos
 	end
 	def show
 		@article.update_visits_count
+		@comments = Comment.paginate(page: params[:page], per_page: 10).where(article_id: @article.id)
 		@comment = Comment.new
 	end
 	def new
@@ -34,6 +37,10 @@ class ArticlesController < ApplicationController
 			@tags = Tag.all
 			render :edit
 		end
+	end
+	def publish
+		@article.publish!
+		redirect_to @article
 	end
 	def destroy
 		@article.destroy

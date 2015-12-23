@@ -1,0 +1,13 @@
+<h4><%= link_to "Crear Post" , new_article_path %></h4>
+
+<ul>
+<% @articles.each do |article| %>
+	<li>
+		<div>
+		<h3><%= link_to article.title, article %> </h3>
+		<%= image_tag article.cover.url :thumb %>
+		<p><%= article.body%> - <%= link_to "Eliminar", article,class: 'red', method: :delete %> <%= '-' unless !article.may_publish? %> <%= link_to "Publicar", "/articles/#{article.id}/publish",class: 'blue', method: :put unless ! article.may_publish? %> </p>
+		</div>
+	</li>
+<% end %>
+</ul>

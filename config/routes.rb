@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
   get 'welcome/index'
 
+  get '/dashboard', to: 'welcome#dashboard'
+  put "/articles/:id/publish", to: 'articles#publish'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

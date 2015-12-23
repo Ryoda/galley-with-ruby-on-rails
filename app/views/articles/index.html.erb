@@ -6,8 +6,10 @@
 		<div>
 		<h3><%= link_to article.title, article %> </h3>
 		<%= image_tag article.cover.url :thumb %>
-		<p><%= article.body%> - <%= link_to "Eliminar", article, method: :delete %> </p>
+		<p><%= article.body%>
 		</div>
 	</li>
 <% end %>
 </ul>
+
+<%= will_paginate @articles %>

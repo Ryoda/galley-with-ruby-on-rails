@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+	include AASM
 	belongs_to :user
 	has_many :comments
 	has_many :has_tags
@@ -26,6 +27,22 @@ class Article < ActiveRecord::Base
 	def save_categories
 		@tags.each do |id|
 			HasTag::create(tag_id: id, article_id: self.id);
+		end
+	end
+
+	scope :publicados, ->{ where(state: :published) }
+
+	scope :ultimos, ->{ order("created_at DESC") }
+
+	aasm column: :state do
+		state :in_draft, initial: true
+		state :published
+
+		event :publish do
+			transitions from: :in_draft, to: :published
+		end
+		event :unpublish do
+			transitions from: :published, to: :in_draft
 		end
 	end
 
